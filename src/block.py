@@ -1,6 +1,5 @@
 import json
-from hashlib import sha256
-
+from utils import calculate_hash
 
 class Block:
     def __init__(self, timestamp, transaction_data, previous_block_hash):
@@ -15,5 +14,5 @@ class Block:
             "previous_block_hash": self.previous_block_hash
         }
 
-        return sha256(json.dumps(block_content).encode()).hexdigest()
+        return calculate_hash(json.dumps(block_content))
 
