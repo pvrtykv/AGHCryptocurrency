@@ -1,5 +1,5 @@
 import json
-from utils import calculate_hash
+from utils import compute_hash
 
 class Block:
     def __init__(self, timestamp, transaction_data, previous_block_hash):
@@ -14,5 +14,5 @@ class Block:
             "previous_block_hash": self.previous_block_hash
         }
 
-        return calculate_hash(json.dumps(block_content))
+        return compute_hash(json.dumps(block_content))
 
