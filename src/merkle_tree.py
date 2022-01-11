@@ -21,8 +21,7 @@ def is_power_of_2(number):
 def build_merkle_tree(data: [str]):
     leaves = []
     for d in data:
-        value = compute_hash(d)
-        leaves.append(Node(value))
+        leaves.append(Node(compute_hash(d)))
 
     tree_depth = get_merkle_tree_depth(len(leaves))
     nodes = []
@@ -43,3 +42,4 @@ def build_merkle_tree(data: [str]):
 def get_merkle_root(transactions: [str]):
     merkle_tree = build_merkle_tree(transactions)
     return merkle_tree.value
+
