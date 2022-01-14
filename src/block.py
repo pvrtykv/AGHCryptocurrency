@@ -1,9 +1,5 @@
 import json
 from utils import compute_hash
-<<<<<<< HEAD
-
-=======
->>>>>>> a200fa73c3ffcb4cf45f3e38b1f75d6cc5a47bc2
 
 class Block:
     def __init__(self, timestamp, previous_block_hash, merkle_root):

@@ -14,9 +14,15 @@ def get_blockchain():
     return json.dumps({"length": len(blockchain.chain)})
 
 
-@app.route("/blockchain/add_block", methods=['GET'])
+@app.route("/blockchain/add_transaction", methods=['GET'])
+def add_transaction():
+    blockchain.add_new_transaction(transactions[0])
+    return transactions[0]
+
+
+@app.route("/blockchain/mine", methods=['GET'])
 def add_block():
-    blockchain.create_new_block(transactions)
+    blockchain.mine()
     block = blockchain.get_last_block()
     return json.dumps({"timestamp": block.timestamp, "previous_hash": block.previous_block_hash,
                        "merkle_root": block.merkle_root})
