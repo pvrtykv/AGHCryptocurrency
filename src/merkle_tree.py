@@ -15,13 +15,29 @@ def get_merkle_tree_depth(number_of_leaves):
 
 def is_power_of_2(number):
     return math.log2(number).is_integer()
-# TODO: what to do when number of leaves is not power of 2
 
 
-def build_merkle_tree(data: [str]):
+def fill_transactions_list(transactions: [str]):
+    previous_number_of_leaves = len(transactions)
+    final_number_of_leaves = 2**get_merkle_tree_depth(previous_number_of_leaves)
+    if previous_number_of_leaves % 2 == 0:
+        for i in range(previous_number_of_leaves, final_number_of_leaves, 2):
+            transactions = transactions + transactions[-1] + transactions[-2]
+    else:
+        for i in range(previous_number_of_leaves, final_number_of_leaves):
+            transactions.append(transactions[-1])
+    return transactions
+
+
+def build_merkle_tree(transactions: [str]):
+    if is_power_of_2(len(transactions)) is False:
+        transactions = fill_transactions_list(transactions)
     leaves = []
-    for d in data:
-        leaves.append(Node(compute_hash(d)))
+    for t in transactions:
+        leaves.append(Node(compute_hash(t)))
+
+    if len(leaves) == 1:
+        return leaves[0]
 
     tree_depth = get_merkle_tree_depth(len(leaves))
     nodes = []

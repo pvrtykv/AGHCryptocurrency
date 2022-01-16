@@ -9,9 +9,13 @@ blockchain = Blockchain()
 transactions = ["A", "B"]
 
 
-@app.route("/blockchain", methods=['GET'])
+@app.route("/blockchain/show_chain", methods=['GET'])
 def get_blockchain():
-    return json.dumps({"length": len(blockchain.chain)})
+    chain = []
+    for block in blockchain.chain:
+        chain.append(block.__dict__)
+    return json.dumps({"chain": chain,
+                            "length": len(blockchain.chain)})
 
 
 @app.route("/blockchain/add_transaction", methods=['GET'])
@@ -20,9 +24,10 @@ def add_transaction():
     return transactions[0]
 
 
-@app.route("/blockchain/mine", methods=['GET'])
+@app.route("/blockchain/mine_block", methods=['GET'])
 def add_block():
-    blockchain.mine()
+    if blockchain.mine() is False:
+        return "There is no transactions to put in the block!"
     block = blockchain.get_last_block()
     return json.dumps({"timestamp": block.timestamp, "previous_hash": block.previous_block_hash,
                        "merkle_root": block.merkle_root})
