@@ -17,7 +17,7 @@ def is_power_of_2(number):
     return math.log2(number).is_integer()
 
 
-def fill_transactions_list(transactions: [str]):
+def fill_transactions_list(transactions):
     previous_number_of_leaves = len(transactions)
     final_number_of_leaves = 2**get_merkle_tree_depth(previous_number_of_leaves)
     if previous_number_of_leaves % 2 == 0:
@@ -29,7 +29,7 @@ def fill_transactions_list(transactions: [str]):
     return transactions
 
 
-def build_merkle_tree(transactions: [str]):
+def build_merkle_tree(transactions):
     if is_power_of_2(len(transactions)) is False:
         transactions = fill_transactions_list(transactions)
     leaves = []
@@ -55,7 +55,7 @@ def build_merkle_tree(transactions: [str]):
     return nodes[0]
 
 
-def get_merkle_root(transactions: [str]):
+def get_merkle_root(transactions):
     merkle_tree = build_merkle_tree(transactions)
     return merkle_tree.value
 
