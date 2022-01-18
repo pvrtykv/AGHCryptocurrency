@@ -17,14 +17,14 @@ def get_blockchain():
     chain = []
     for block in blockchain.chain:
         block_data = json.dumps({"block_header": {
-        "timestamp": block.block_header.timestamp,
-        "previous_block_hash": block.block_header.previous_block_hash,
-        "merkle_root": block.block_header.merkle_root
+            "timestamp": block.block_header.timestamp,
+            "previous_block_hash": block.block_header.previous_block_hash,
+            "merkle_root": block.block_header.merkle_root
         }
         })
         chain.append(block_data)
     return json.dumps({"chain": chain,
-                            "length": len(blockchain.chain)})
+                        "length": len(blockchain.chain)})
 
 
 @app.route("/blockchain/add_transaction", methods=['GET'])
