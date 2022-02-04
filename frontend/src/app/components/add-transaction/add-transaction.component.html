@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="makeTransaction()">
+  <div class="form-group row">
+    <label>Sender</label>
+    <input class="form-control" formControlName="sender">
+  </div>
+  <div class="form-group row">
+    <label>Recipient</label>
+    <input class="form-control" formControlName="recipient">
+  </div>
+  <div class="form-group row">
+    <label>Amount</label>
+    <input class="form-control" type="number" formControlName="amount">
+  </div>
+  <button type="submit" class="btn btn-primary">Commit transaction</button>
+</form>

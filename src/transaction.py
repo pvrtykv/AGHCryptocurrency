@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 
 class Transaction:
@@ -7,9 +8,9 @@ class Transaction:
 		self.recipient = recipient,
 		self.amount = amount
 
-	def get_transaction_data(self):
-		return json.dumps({
+	def get_transaction_data(self) -> Dict:
+		return {
 			"sender": self.sender,
 			"recipient": self.recipient,
 			"amount": self.amount
-		})
+		}

@@ -1,15 +1,5 @@
-<form [formGroup]="form" (ngSubmit)="makeTransaction()">
-  <div>
-    <label>Sender</label>
-    <input formControlName="sender">
-  </div>
-  <div>
-    <label>Recipient</label>
-    <input formControlName="recipient">
-  </div>
-  <div>
-    <label>Amount</label>
-    <input type="number" formControlName="amount">
-  </div>
-  <button type="submit">Commit transaction</button>
-</form>
+<div *ngIf="transaction!=null" class="card bg-light">
+  <p>Sender: {{transaction.sender}}</p>
+  <p>Recipient: {{transaction.recipient}}</p>
+  <p>Amount: {{transaction.amount}}</p>
+</div>

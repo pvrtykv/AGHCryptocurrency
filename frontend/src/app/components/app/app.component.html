@@ -1,2 +1,7 @@
-<app-blockchain></app-blockchain>
-<app-transaction></app-transaction>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6 col-sm-7">
+    <app-blockchain></app-blockchain>
+    <app-add-transaction (refresh)="refresh()"></app-add-transaction>
+    <app-unverified-transactions></app-unverified-transactions>
+  </div>
+</div>

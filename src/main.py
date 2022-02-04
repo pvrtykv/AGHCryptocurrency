@@ -8,13 +8,8 @@ app = Flask(__name__)
 blockchain = Blockchain()
 
 
-@app.route("/")
-def index():
-	return render_template("index.html")
-
-
 @app.route("/blockchain/show_chain", methods=['GET'])
-def get_blockchain():
+def get_blockchain() -> str:
 	chain = []
 	for block in blockchain.chain:
 		block_data = {
@@ -29,24 +24,21 @@ def get_blockchain():
 
 
 @app.route("/blockchain/add_transaction", methods=['POST'])
-def add_transaction():
+def add_transaction() -> str:
 	transaction_request = request.get_json()
 	transaction = Transaction(transaction_request.get('sender'), transaction_request.get('recipient'),
-							  transaction_request.get('amount'))
+								transaction_request.get('amount'))
 	blockchain.add_new_transaction(transaction)
-	return transaction.get_transaction_data()
+	return json.dumps(transaction.get_transaction_data())
 
 
 @app.route("/blockchain/show_unverified_transactions", methods=['GET'])
-def get_unverified_transactions():
-	transactions = []
-	for transaction_data in blockchain.unverified_transactions:
-		transactions.append(transaction_data)
-	return json.dumps(transactions)
+def get_unverified_transactions() -> str:
+	return json.dumps(blockchain.get_unverified_transactions_data())
 
 
 @app.route("/blockchain/mine_block", methods=['GET'])
-def add_block():
+def add_block() -> str:
 	if blockchain.mine() is False:
 		return "There are no transactions to put in the block!"
 	block = blockchain.get_last_block()

@@ -15,6 +15,10 @@ export class BlockchainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.refresh()
+  }
+
+  refresh(): void {
     this.httpClient.get("/api/blockchain/show_chain")
       .subscribe({
         next: (value: any) => { this.blocks = value as Block[] },
