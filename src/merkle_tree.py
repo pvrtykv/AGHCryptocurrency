@@ -1,4 +1,6 @@
 import math
+from typing import List
+
 from utils import compute_hash
 
 
@@ -55,7 +57,7 @@ def build_merkle_tree(transactions):
     return nodes[0]
 
 
-def get_merkle_root(transactions):
+def get_merkle_root(transactions: List[str]):
     merkle_tree = build_merkle_tree(transactions)
     return merkle_tree.value
 

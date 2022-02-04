@@ -1,4 +1,4 @@
-from block import Block
+from utils import dicts_to_strings
 import time
 
 from merkle_tree import get_merkle_root
@@ -20,12 +20,17 @@ class Blockchain:
     def get_last_block(self) -> Block:
         return self.chain[-1]
 
-    def create_new_block(self, block):
+    def create_new_block(self, block: Block):
         self.chain.append(block)
 
-    def add_new_transaction(self, transaction):
-        transaction_data = transaction.get_transaction_data()
-        self.unverified_transactions.append(transaction_data)
+    def add_new_transaction(self, transaction: Transaction):
+        self.unverified_transactions.append(transaction)
+
+    def get_unverified_transactions_data(self):
+        unverified_transactions_data = []
+        for transaction in self.unverified_transactions:
+            unverified_transactions_data.append(transaction.get_transaction_data())
+        return unverified_transactions_data
 
     def mine(self):
         if not self.unverified_transactions:
@@ -33,7 +38,7 @@ class Blockchain:
 
         last_block = self.get_last_block()
         last_block_hash = last_block.block_header.compute_block_hash()
-        merkle_root = get_merkle_root(self.unverified_transactions)
+        merkle_root = get_merkle_root(dicts_to_strings(self.get_unverified_transactions_data()))
         new_block_header = BlockHeader(time.time(), last_block_hash, merkle_root)
         new_block = Block(new_block_header, self.unverified_transactions)
 
