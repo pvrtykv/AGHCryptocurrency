@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { BlockchainComponent } from './components/blockchain/blockchain.component';
@@ -10,6 +9,7 @@ import { AddTransactionComponent } from './components/add-transaction/add-transa
 import {ReactiveFormsModule} from "@angular/forms";
 import { UnverifiedTransactionsComponent } from './components/unverified-transactions/unverified-transactions.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { TransactionComponent } from './components/transaction/transaction.compo
     BlockComponent,
     AddTransactionComponent,
     UnverifiedTransactionsComponent,
-    TransactionComponent
+    TransactionComponent,
+    NavComponent
   ],
     imports: [
         BrowserModule,

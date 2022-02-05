@@ -1,6 +1,8 @@
-<h1>Unverified transactions</h1>
+<h1>Transactions</h1>
 <ul>
   <li *ngFor="let transaction of transactions">
     <app-transaction [transaction]="transaction"></app-transaction>
   </li>
 </ul>
+
+<app-add-transaction></app-add-transaction>

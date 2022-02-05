@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Block} from "../../model/block";
 
@@ -7,7 +7,7 @@ import {Block} from "../../model/block";
   templateUrl: './blockchain.component.html',
   styleUrls: ['./blockchain.component.css']
 })
-export class BlockchainComponent implements OnInit {
+export class BlockchainComponent {
   blocks: Block[]
 
   constructor(private readonly httpClient: HttpClient) {
