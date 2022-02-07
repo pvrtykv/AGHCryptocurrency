@@ -5,6 +5,7 @@ import {BlockchainComponent} from "./components/blockchain/blockchain.component"
 import {UnverifiedTransactionsComponent} from "./components/unverified-transactions/unverified-transactions.component";
 
 const routes: Routes = [
+  {path: '', component: BlockchainComponent},
   {path: 'blockchain', component: BlockchainComponent},
   {path: 'transactions', component: UnverifiedTransactionsComponent}
 ];

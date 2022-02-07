@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { UnverifiedTransactionsComponent } from './components/unverified-transactions/unverified-transactions.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { NavComponent } from './components/nav/nav.component';
+import { MineBlockComponent } from './components/mine-block/mine-block.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NavComponent } from './components/nav/nav.component';
     AddTransactionComponent,
     UnverifiedTransactionsComponent,
     TransactionComponent,
-    NavComponent
+    NavComponent,
+    MineBlockComponent
   ],
     imports: [
         BrowserModule,
