@@ -1,7 +1,7 @@
+import json
 from flask import Flask, render_template, request
 from transaction import Transaction
 from blockchain import Blockchain
-import json
 
 
 if __name__ == "__main__":
@@ -22,7 +22,7 @@ if __name__ == "__main__":
 				}
 			}
 			chain.append(block_data)
-		return json.dumps(chain)
+		return json.dumps(chain, indent=4)
 
 
 	@app.route("/blockchain/add_transaction", methods=['POST'])
@@ -31,12 +31,12 @@ if __name__ == "__main__":
 		transaction = Transaction(transaction_request.get('sender'), transaction_request.get('recipient'),
 									transaction_request.get('amount'))
 		blockchain.add_new_transaction(transaction)
-		return json.dumps(transaction.get_transaction_data())
+		return json.dumps(transaction.get_transaction_data(), indent=4)
 
 
 	@app.route("/blockchain/show_unverified_transactions", methods=['GET'])
 	def get_unverified_transactions() -> str:
-		return json.dumps(blockchain.get_unverified_transactions_data())
+		return json.dumps(blockchain.get_unverified_transactions_content(), indent=4)
 
 
 	@app.route("/blockchain/mine_block", methods=['GET'])
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 				"previous_block_hash": block.block_header.previous_block_hash,
 				"merkle_root": block.block_header.merkle_root
 			}
-		})
+		}, indent=4)
 
 
 app.run(debug=True, port=8000)
