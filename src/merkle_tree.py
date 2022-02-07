@@ -5,7 +5,7 @@ from utils import compute_hash
 
 
 class Node:
-	def __init__(self, value: str, left: str = None, right: str = None):
+	def __init__(self, value: str, left=None, right=None):
 		self.value = value
 		self.left = left
 		self.right = right
@@ -32,9 +32,11 @@ def fill_transactions_list(transactions: List[str]) -> List[str]:
 
 
 def build_merkle_tree(transactions: List[str]) -> Node:
+	print("Building merkle tree...")
 	if is_power_of_2(len(transactions)) is False:
 		transactions = fill_transactions_list(transactions)
 	leaves = []
+
 	for transaction in transactions:
 		leaves.append(Node(compute_hash(transaction)))
 
@@ -53,7 +55,6 @@ def build_merkle_tree(transactions: List[str]) -> Node:
 			node = Node(compute_hash(left_child.value + right_child.value), left_child, right_child)
 			nodes.append(node)
 		leaves = nodes
-
 	return nodes[0]
 
 

@@ -1,9 +1,8 @@
 import json
-from typing import List
-
-from utils import dicts_to_strings
 import time
 
+from typing import List, Dict
+from utils import dicts_to_strings
 from merkle_tree import get_merkle_root
 from block import Block, BlockHeader
 from transaction import Transaction
@@ -29,7 +28,7 @@ class Blockchain:
 	def add_new_transaction(self, transaction: Transaction):
 		self.unverified_transactions.append(transaction)
 
-	def get_unverified_transactions_data(self) -> List[dict]:
+	def get_unverified_transactions_content(self) -> List[dict]:
 		unverified_transactions_data = []
 		for transaction in self.unverified_transactions:
 			unverified_transactions_data.append(transaction.get_transaction_data())
@@ -41,13 +40,25 @@ class Blockchain:
 
 		last_block = self.get_last_block()
 		last_block_hash = last_block.block_header.hash
-		merkle_root = get_merkle_root(dicts_to_strings(self.get_unverified_transactions_data()))
+		print("Calculating merkle root of unverified transactions...")
+		merkle_root = get_merkle_root(dicts_to_strings(self.get_unverified_transactions_content()))
+		print(f'Calculated merkle root: {merkle_root}')
 		new_block_header = BlockHeader(time.time(), last_block_hash, merkle_root)
+		print("---------------------------------------------------------")
 		print("Mining block...")
-		new_block_header.mine_block(new_block_header.difficulty)
+		new_block_header.mine(new_block_header.difficulty)
 		new_block = Block(new_block_header, self.unverified_transactions)
-		print("Mined block: ")
-		print(json.dumps(new_block_header.block_header_content(), indent=4))
+		new_block_header_content = new_block_header.get_block_header_content()
+		new_block_header_content["hash"] = new_block_header.hash
+		print("Mined block:")
+		print(json.dumps(new_block_header_content, indent=4))
 
 		self.append_block(new_block)
 		self.unverified_transactions = []
+		return True
+
+	def get_blockchain_content(self) -> List[Dict]:
+		blockchain_content = []
+		for block in self.chain:
+			blockchain_content.append(block.block_header.get_block_header_content())
+		return blockchain_content

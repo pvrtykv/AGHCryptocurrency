@@ -1,7 +1,7 @@
 import json
 from utils import compute_hash
 
-DIFFICULTY = 4
+DIFFICULTY = 2
 
 
 class BlockHeader:
@@ -13,7 +13,7 @@ class BlockHeader:
 		self.nonce = 0
 		self.hash = self.compute_block_hash()
 
-	def block_header_content(self) -> dict:
+	def get_block_header_content(self) -> dict:
 		return {
 			"timestamp": self.timestamp,
 			"previous_block_hash": self.previous_block_hash,
@@ -23,10 +23,11 @@ class BlockHeader:
 		}
 
 	def compute_block_hash(self) -> str:
-		return compute_hash(json.dumps(self.block_header_content()))
+		return compute_hash(json.dumps(self.get_block_header_content()))
 
-	def mine_block(self, difficulty):
+	def mine(self, difficulty):
 		while self.hash[:difficulty] != "0" * difficulty:
+			print(f'Trying again... {self.hash}')
 			self.nonce += 1
 			self.hash = self.compute_block_hash()
 
