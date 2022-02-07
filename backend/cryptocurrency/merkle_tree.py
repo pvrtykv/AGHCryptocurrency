@@ -1,7 +1,6 @@
 import math
 from typing import List
-
-from utils import compute_hash
+from .utils import compute_hash
 
 
 class Node:

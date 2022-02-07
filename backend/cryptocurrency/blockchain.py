@@ -2,10 +2,10 @@ import json
 import time
 
 from typing import List, Dict
-from utils import dicts_to_strings
-from merkle_tree import get_merkle_root
-from block import Block, BlockHeader
-from transaction import Transaction
+from .utils import dicts_to_strings
+from .merkle_tree import get_merkle_root
+from .block import Block, BlockHeader
+from .transaction import Transaction
 
 
 class Blockchain:

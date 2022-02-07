@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from utils import compute_hash
-from merkle_tree import get_merkle_root
+from cryptocurrency.utils import compute_hash
+from cryptocurrency.merkle_tree import get_merkle_root
 
 TRANSACTION_DATA_1 = json.dumps({"Sender": "Address1", "Recipient": "Address2", "Amount": 200})
 TRANSACTION_DATA_2 = json.dumps({"Sender": "Address1", "Recipient": "Address3", "Amount": 100})

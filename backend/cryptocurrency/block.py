@@ -1,5 +1,5 @@
 import json
-from utils import compute_hash
+from .utils import compute_hash
 
 DIFFICULTY = 2
 
