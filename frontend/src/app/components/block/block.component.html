@@ -1,5 +1,8 @@
 <div *ngIf="block!=null" class="card bg-light">
-  <p>Timestamp: {{block.blockHeader.timestamp}}</p>
-  <p>Previous Block Hash: {{block.blockHeader.previousBlockHash}}</p>
-  <p>Merkle Root: {{block.blockHeader.merkleRoot}}</p>
+  <p>Timestamp: {{block.timestamp}}</p>
+  <p>Previous Block Hash: {{block.previous_block_hash}}</p>
+  <p>Merkle Root: {{block.merkle_root}}</p>
+  <p>Difficulty: {{block.difficulty}}</p>
+  <p>Nonce: {{block.nonce}}</p>
+  <p>Hash: {{block.hash}}</p>
 </div>

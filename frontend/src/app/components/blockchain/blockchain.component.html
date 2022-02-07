@@ -1,7 +1,7 @@
-<app-mine-block></app-mine-block>
 <h1 class="text-center">Blockchain</h1>
 <ul>
   <li *ngFor="let block of blocks">
     <app-block [block]="block"></app-block>
   </li>
 </ul>
+<app-mine-block (refresh)="refresh()"></app-mine-block>

@@ -12,17 +12,7 @@ if __name__ == "__main__":
 
 	@app.route("/blockchain/show_chain", methods=['GET'])
 	def get_blockchain() -> str:
-		chain = []
-		for block in blockchain.chain:
-			block_data = {
-				"blockHeader": {
-					"timestamp": block.block_header.timestamp,
-					"previousBlockHash": block.block_header.previous_block_hash,
-					"merkleRoot": block.block_header.merkle_root
-				}
-			}
-			chain.append(block_data)
-		return json.dumps(chain, indent=4)
+		return json.dumps(blockchain.get_blockchain_content(), indent=4)
 
 
 	@app.route("/blockchain/add_transaction", methods=['POST'])
@@ -44,13 +34,9 @@ if __name__ == "__main__":
 		if blockchain.mine_block() is False:
 			return "There are no transactions to put in the block!"
 		block = blockchain.get_last_block()
-		return json.dumps({
-			"block_header": {
-				"timestamp": block.block_header.timestamp,
-				"previous_block_hash": block.block_header.previous_block_hash,
-				"merkle_root": block.block_header.merkle_root
-			}
-		}, indent=4)
+		block_header_content = block.block_header.get_block_header_content()
+		block_header_content["hash"] = block.block_header.hash
+		return json.dumps(block_header_content, indent=4)
 
 
-app.run(debug=True, port=8000)
+app.run(host="0.0.0.0", debug=True, port=8000)

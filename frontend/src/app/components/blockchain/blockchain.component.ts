@@ -20,8 +20,7 @@ export class BlockchainComponent {
 
   refresh(): void {
     this.httpClient.get("/api/blockchain/show_chain")
-      .subscribe({
-        next: (value: any) => { this.blocks = value as Block[] },
+      .subscribe({next: (value: any) => { this.blocks = value as Block[]},
         error: (error: any) => {}
       })
   }

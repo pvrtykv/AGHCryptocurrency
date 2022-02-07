@@ -60,5 +60,7 @@ class Blockchain:
 	def get_blockchain_content(self) -> List[Dict]:
 		blockchain_content = []
 		for block in self.chain:
-			blockchain_content.append(block.block_header.get_block_header_content())
+			block_header_content = block.block_header.get_block_header_content()
+			block_header_content["hash"] = block.block_header.hash
+			blockchain_content.append(block_header_content)
 		return blockchain_content
