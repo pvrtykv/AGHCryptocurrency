@@ -1,11 +1,13 @@
 import json
+from typing import List, Dict
+
 from .utils import compute_hash
 
 DIFFICULTY = 2
 
 
 class BlockHeader:
-	def __init__(self, timestamp, previous_block_hash, merkle_root):
+	def __init__(self, timestamp: float, previous_block_hash: str, merkle_root: str):
 		self.timestamp = timestamp
 		self.previous_block_hash = previous_block_hash
 		self.merkle_root = merkle_root
@@ -33,6 +35,6 @@ class BlockHeader:
 
 
 class Block:
-	def __init__(self, block_header: BlockHeader, transactions_data):
+	def __init__(self, block_header: BlockHeader, transactions_data: List[Dict]):
 		self.block_header = block_header
 		self.transactions_data = transactions_data

@@ -16,7 +16,7 @@ class Blockchain:
 
 	def create_genesis_block(self):
 		genesis_block_header = BlockHeader(time.time(), "0", "")
-		genesis_block = Block(genesis_block_header, "")
+		genesis_block = Block(genesis_block_header, [])
 		self.chain.append(genesis_block)
 
 	def get_last_block(self) -> Block:
@@ -47,7 +47,7 @@ class Blockchain:
 		print("---------------------------------------------------------")
 		print("Mining block...")
 		new_block_header.mine(new_block_header.difficulty)
-		new_block = Block(new_block_header, self.unverified_transactions)
+		new_block = Block(new_block_header, self.get_unverified_transactions_content())
 		new_block_header_content = new_block_header.get_block_header_content()
 		new_block_header_content["hash"] = new_block_header.hash
 		print("Mined block:")
