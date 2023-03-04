@@ -1,4 +1,5 @@
 # AGHCryptocurrency
+Application that implements simplified model of cryptocurrency using blockchain and Merkle Tree data strucure.
 
 ### How to run 
 To run web application using Docker:
